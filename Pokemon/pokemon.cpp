@@ -3,11 +3,12 @@
 #include<stdlib.h>
 #include<string.h>
 #include<time.h>
-
 using namespace std;
+
 
 int user_score = 0, cpu_score = 0;
 int p;
+int fruit = 2;
 void pok_assign(void);
 void pok_display(void);
 void pok_display(int);
@@ -216,8 +217,14 @@ int main()
 	cout << "\t    *        *    *    *                   *        *" << endl;
 	cout << "\t    *       *      *   *                   *        *" << endl;
 	cout << "\t*********  *        *  ******* *********** *****    *" << endl;
-	cout << "---------------------------------------------------------------------" << endl;
+	cout << "-------------------------------------------------------------------------------------------------" << endl;
 
+	cout << " 게임 룰\n" << "1. 게임은 3판 2선승제이며 처음 3마리 포켓몬이 랜덤으로 지정된다.(중복 있음)" << endl;
+	cout << "2. 지정된 포켓몬 중 한 포켓몬을 선택하여 상대(컴퓨터)와의 포켓몬 배틀이 시작된다." << endl;
+	cout << "3. [ 1) 싸운다 2) 가방 3) 포켓몬 4) 도망간다 ]는 선택지가 있는데 원하는 선택지를 고르면 된다." << endl << endl;
+	cout << "※ 싸운다 - 민첩, 공격, 방어, 강화 4가지의 선택지가 있으며 상황에 맞게 사용하면 된다. " << endl;
+	cout << "   강화는 3가지 능력치 중 랜덤으로 +100이 증가하고 체력의 경우 현재 체력의 2배가 된다." << endl;
+	cout << "-------------------------------------------------------------------------------------------------" << endl;
 	while (true) {
 		restart:
 			//	clrscr();
@@ -249,16 +256,15 @@ int main()
 
 void play(int pok)
 {
-	int choice, num, ber;
-	int bag, fruit;
-	fruit = 1;
+	int choice, num, ber, bag;
 
+	cout << "\n\n나의 포켓몬: " << user.pokemon[pok].getname()
+		<< "\t체력: " << user.pokemon[pok].hlt();
+	cout << "\n상대 포켓몬 : " << cpu.pokemon[p].getname()
+		<< "\t체력: " << cpu.pokemon[p].hlt() << endl;
 
-	cout << "\n나의 포켓몬 : " << user.pokemon[pok].getname();
-	cout << "\n상대 포켓몬: " << cpu.pokemon[p].getname() << endl;
 	while ((user.pokemon[pok].hlt() > 0) && (cpu.pokemon[p].hlt() > 0))
 	{
-		
 		do {
 			cout << "_____________________________________________";
 			cout << "\n선택: ";
@@ -298,14 +304,18 @@ void play(int pok)
 					cout << "배틀 중에 사용할 수 없습니다!\n";
 				}
 				if (bag == 2) {
-					if (fruit>0)
+					do
 					{
-						cout << user.pokemon[pok].getname() << "의 체력이 10증가 했습니다.\n";
-						cout << "현재 체력" << user.pokemon[pok].hlt() + 10 << endl;
-						user.pokemon[pok].health += 10;
-					}
-					else if (fruit == 0) { cout << "열매가 없습니다!\n"; }
-					fruit--;
+						if (fruit > 0)
+						{
+							cout << user.pokemon[pok].getname() << "의 체력이 10증가 했습니다.\n";
+							cout << "현재 체력" << user.pokemon[pok].hlt() + 10 << endl;
+							user.pokemon[pok].health += 10;
+							fruit--;
+						}
+						else if (fruit == 0) { cout << "열매가 없습니다!\n"; }
+						
+					} while (fruit<0);
 				}
 			}
 			else if (num == 3) {
