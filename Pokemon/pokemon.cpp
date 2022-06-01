@@ -76,17 +76,16 @@ void POK::special(int pok)
 	case 0:	health *= 2;
 		cout << "\nÃ¼·Â 2¹è!";
 		break;
-	case 1: speed *= power;
+	case 1: speed += power;
 		cout << "\n¹ÎÃ¸ ÁõÆø!";
 		break;
-	case 2: defence *= power;
+	case 2: defence += power;
 		cout << "\n¹æ¾î ÁõÆø!";
 		break;
-	case 3: offence *= power;
+	case 3: offence += power;
 		cout << "\n°ø°Ý ÁõÆø!";
 		break;
 	}
-	power = 0;
 	pok_display(pok);
 
 }
@@ -207,7 +206,7 @@ void POK::agility(int pok)
 
 int main()
 {
-	int pok;
+	
 	cout << "\t********* *****   * *  *******      *      *****    *" << endl;
 	cout << "\t  *   *       *   * *  *     *     * *     *        *" << endl;
 	cout << "\t  *   *   ***** *** *  *******    *   *    *        *" << endl;
