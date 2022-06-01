@@ -3,7 +3,6 @@
 #include<stdlib.h>
 #include<string.h>
 #include<time.h>
-#include <list>
 
 using namespace std;
 
@@ -100,32 +99,32 @@ void POK::attack(int pok)
 	switch (ch)
 	{
 	case 0: cout << "\n상대는 민첩을 선택했다!";
-		cpu_val = cpu.pokemon[pok].spd();
+		cpu_val = cpu.pokemon[p].spd();
 		if (cpu_val - user_val > 50)
 			user.pokemon[pok].health -= 10;
 		else
-			cpu.pokemon[pok].health -= 20;
+			cpu.pokemon[p].health -= 20;
 		break;
 	case 1: cout << "\n상대는 방어를 선택했다!";
-		cpu_val = cpu.pokemon[pok].def();
+		cpu_val = cpu.pokemon[p].def();
 		if (user_val - cpu_val > 50)
-			cpu.pokemon[pok].health -= 10;
+			cpu.pokemon[p].health -= 10;
 		else
 			user.pokemon[pok].health -= 20;
 		break;
 	case 2: cout << "\n상대는 공격을 선택했다!";
-		cpu_val = cpu.pokemon[pok].off();
+		cpu_val = cpu.pokemon[p].off();
 		if (user_val - cpu_val > 50)
-			cpu.pokemon[pok].health -= 20;
+			cpu.pokemon[p].health -= 20;
 		else if (cpu_val - user_val > 50)
 			user.pokemon[pok].health -= 20;
 		else if (cpu_val > user_val)
 			user.pokemon[pok].health -= 10;
 		else if (user_val > cpu_val)
-			cpu.pokemon[pok].health -= 10;
+			cpu.pokemon[p].health -= 10;
 		break;
 	case 3: cout << "\n상대는 강화를 선택했다!";
-		cpu.pokemon[pok].special(pok);
+		cpu.pokemon[p].special(pok);
 		break;
 	}
 }
@@ -138,32 +137,32 @@ void POK::defend(int pok)
 	switch (ch)
 	{
 	case 0: cout << "\n상대는 민첩을 선택했다!";
-		cpu_val = cpu.pokemon[pok].spd();
+		cpu_val = cpu.pokemon[p].spd();
 		if (user_val - cpu_val > 50)
-			cpu.pokemon[pok].health -= 10;
+			cpu.pokemon[p].health -= 10;
 		else
 			user.pokemon[pok].health -= 20;
 		break;
 	case 1: cout << "\n상대는 공격을 선택했다!";
-		cpu_val = cpu.pokemon[pok].off();
+		cpu_val = cpu.pokemon[p].off();
 		if (cpu_val - user_val > 50)
 			user.pokemon[pok].health -= 10;
 		else
-			cpu.pokemon[pok].health -= 20;
+			cpu.pokemon[p].health -= 20;
 		break;
 	case 2: cout << "\n상대는 방어를 선택했다!";
-		cpu_val = cpu.pokemon[pok].def();
+		cpu_val = cpu.pokemon[p].def();
 		if (user_val - cpu_val > 50)
-			cpu.pokemon[pok].health -= 20;
+			cpu.pokemon[p].health -= 20;
 		else if (cpu_val - user_val > 50)
 			user.pokemon[pok].health -= 20;
 		else if (cpu_val > user_val)
 			user.pokemon[pok].health -= 10;
 		else if (user_val > cpu_val)
-			cpu.pokemon[pok].health -= 10;
+			cpu.pokemon[p].health -= 10;
 		break;
 	case 3: cout << "\n상대는 강화를 선택했다!";
-		cpu.pokemon[pok].special(pok);
+		cpu.pokemon[p].special(pok);
 		break;
 	}
 }
@@ -176,32 +175,32 @@ void POK::agility(int pok)
 	switch (ch)
 	{
 	case 0: cout << "\n상대는 방어를 선택했다!";
-		cpu_val = cpu.pokemon[pok].def();
+		cpu_val = cpu.pokemon[p].def();
 		if (cpu_val - user_val > 50)
 			user.pokemon[pok].health -= 10;
 		else
-			cpu.pokemon[pok].health -= 20;
+			cpu.pokemon[p].health -= 20;
 		break;
 	case 1: cout << "\n상대는 공격을 선택했다!";
-		cpu_val = cpu.pokemon[pok].off();
+		cpu_val = cpu.pokemon[p].off();
 		if (user_val - cpu_val > 50)
-			cpu.pokemon[pok].health -= 10;
+			cpu.pokemon[p].health -= 10;
 		else
 			user.pokemon[pok].health -= 20;
 		break;
 	case 2: cout << "\n상대는 민첩을 선택했다!";
-		cpu_val = cpu.pokemon[pok].spd();
+		cpu_val = cpu.pokemon[p].spd();
 		if (user_val - cpu_val > 50)
-			cpu.pokemon[pok].health -= 20;
+			cpu.pokemon[p].health -= 20;
 		else if (cpu_val - user_val > 50)
 			user.pokemon[pok].health -= 20;
 		else if (cpu_val > user_val)
 			user.pokemon[pok].health -= 10;
 		else if (user_val > cpu_val)
-			cpu.pokemon[pok].health -= 10;
+			cpu.pokemon[p].health -= 10;
 		break;
 	case 3: cout << "\n상대는 강화를 선택했다!";
-		cpu.pokemon[pok].special(pok);
+		cpu.pokemon[p].special(pok);
 		break;
 	}
 }
@@ -213,7 +212,7 @@ int main()
 	cout << "\t  *   *       *   * *  *     *     * *     *        *" << endl;
 	cout << "\t  *   *   ***** *** *  *******    *   *    *        *" << endl;
 	cout << "\t*********    *    * *     *      *     *   *        *" << endl;
-	cout << "\t    *       *  ** * *  *******  *       *  *****  ***    " << endl;
+	cout << "\t    *       *  ** * *  *******  *       *  *****  ***" << endl;
 	cout << "\t    *         *  *     *                   *        *" << endl;
 	cout << "\t    *        *    *    *                   *        *" << endl;
 	cout << "\t    *       *      *   *                   *        *" << endl;
@@ -255,18 +254,19 @@ void play(int pok)
 	int bag, fruit;
 	fruit = 1;
 
-	cout << "\n나의 포켓몬 : " << user.pokemon[p].getname();
+
+	cout << "\n나의 포켓몬 : " << user.pokemon[pok].getname();
 	cout << "\n상대 포켓몬: " << cpu.pokemon[p].getname() << endl;
-	while ((user.pokemon[p].hlt() > 0) && (cpu.pokemon[p].hlt() > 0))
+	while ((user.pokemon[pok].hlt() > 0) && (cpu.pokemon[p].hlt() > 0))
 	{
 		
 		do {
 			cout << "_____________________________________________";
 			cout << "\n선택: ";
-			cout << "\n1.) 민첩: " << user.pokemon[p].spd()<<"%"
-				<< "\t\t2.) 공격:  " << user.pokemon[p].off()<<"%"
-				<< "\n3.) 방어: " << user.pokemon[p].def()<<"%"
-				<< "\t\t4.) 강화: " << user.pokemon[p].pow()<<"%";
+			cout << "\n1.) 민첩: " << user.pokemon[pok].spd()<<"%"
+				<< "\t\t2.) 공격:  " << user.pokemon[pok].off()<<"%"
+				<< "\n3.) 방어: " << user.pokemon[pok].def()<<"%"
+				<< "\t\t4.) 강화: " << user.pokemon[pok].pow()<<"%";
 			cout << "\n\n선택하세요: ";
 			cin >> choice;
 		} while (choice < 0 || choice>4);//예외사항일때 반복(음수or4초과)
@@ -274,19 +274,19 @@ void play(int pok)
 		switch (choice)
 		{
 		case 0:exit(0);
-		case 1:user.pokemon[p].agility(p);	break;
-		case 2:user.pokemon[p].attack(p);	break;
-		case 3:user.pokemon[p].defend(p);	break;
-		case 4:user.pokemon[p].special(p);	break;
+		case 1:user.pokemon[pok].agility(pok);	break;
+		case 2:user.pokemon[pok].attack(pok);	break;
+		case 3:user.pokemon[pok].defend(pok);	break;
+		case 4:user.pokemon[pok].special(pok);	break;
 		} 
 		//(1~4까지 선택 할 경우)
 
-		cout << "\n\n나의 포켓몬: " << user.pokemon[p].getname()
-			<< "\t체력: " << user.pokemon[p].hlt();
+		cout << "\n\n나의 포켓몬: " << user.pokemon[pok].getname()
+			<< "\t체력: " << user.pokemon[pok].hlt();
 		cout << "\n상대 포켓몬 : " << cpu.pokemon[p].getname()
 			<< "\t체력: " << cpu.pokemon[p].hlt() << endl;
 
-		if ((user.pokemon[p].hlt() > 0) && (cpu.pokemon[p].hlt() > 0))
+		if ((user.pokemon[pok].hlt() > 0) && (cpu.pokemon[p].hlt() > 0))
 		{
 			cout << "\n____________________________________________\n";
 			cout << "1) 싸운다  2) 가방  3) 포켓몬  4) 도망간다 :";
@@ -301,30 +301,29 @@ void play(int pok)
 				if (bag == 2) {
 					if (fruit>0)
 					{
-						cout << user.pokemon[p].getname() << "의 체력이 10증가 했습니다.\n";
-						cout << "현재 체력" << user.pokemon[p].hlt() + 10 << endl;
-						user.pokemon[p].health += 10;
+						cout << user.pokemon[pok].getname() << "의 체력이 10증가 했습니다.\n";
+						cout << "현재 체력" << user.pokemon[pok].hlt() + 10 << endl;
+						user.pokemon[pok].health += 10;
 					}
 					else if (fruit == 0) { cout << "열매가 없습니다!\n"; }
 					fruit--;
 				}
 			}
 			else if (num == 3) {
-				int choice;
-				cout << "현재 포켓몬은 " << user.pokemon[p].getname() << "입니다.";
+				int l;
+				cout << "현재 포켓몬은 " << user.pokemon[pok].getname() << "입니다.";
 				
 				pok_display();
 					cout << "\n\n3마리 중 어떤 포켓몬으로 교체하시겠습니까? : ";
-					cin >> choice;
+					cin >> l;
 
-					if (p == choice) {
+					if (l == pok+1) {
 						cout << "같은 포켓몬으로 교체할 수 없습니다." << endl;
 					}
 					else {
-						cout << user.pokemon[choice-1].getname() << "\n";
-						user.pokemon[p] = user.pokemon[choice-1];
+						cout << user.pokemon[l-1].getname() << "\n";
+						pok = l - 1;
 					}
-				
 			}
 			else if (num == 4) {
 				cout << "도망칠 수 없습니다. 종료 하시겠습니까?" << endl;
@@ -342,7 +341,7 @@ void play(int pok)
 	}
 		
 	
-	if (user.pokemon[pok].hlt() > cpu.pokemon[pok].hlt())
+	if (user.pokemon[pok].hlt() > cpu.pokemon[p].hlt())
 	{
 		user_score++;
 		cout << "\n\n**********************";
@@ -428,12 +427,12 @@ void pok_display(int i)
 		<< "\t" << user.pokemon[i].def()
 		<< "\t" << user.pokemon[i].off();
 
-	cout << "\nCPU : " << cpu.pokemon[i].getname();
+	cout << "\nCPU : " << cpu.pokemon[p].getname();
 	cout << "\n\t강화\t체력\t민첩\t방어\t공격" << endl;
-	cout << "\t" << cpu.pokemon[i].pow()
-		<< "\t" << cpu.pokemon[i].hlt()
-		<< "\t" << cpu.pokemon[i].spd()
-		<< "\t" << cpu.pokemon[i].def()
-		<< "\t" << cpu.pokemon[i].off();
+	cout << "\t" << cpu.pokemon[p].pow()
+		<< "\t" << cpu.pokemon[p].hlt()
+		<< "\t" << cpu.pokemon[p].spd()
+		<< "\t" << cpu.pokemon[p].def()
+		<< "\t" << cpu.pokemon[p].off();
 }
 //강화를 선택할 경우
