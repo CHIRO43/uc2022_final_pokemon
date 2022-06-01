@@ -21,7 +21,7 @@ private:
 	int speed;
 	int defence;
 	int offence;
-	char name[10];
+	char name[12];
 
 public:
 	
@@ -39,7 +39,7 @@ public:
 
 	POK() {}
 
-	POK(int p, float h, int s, int d, int o, char n[10])
+	POK(int p, float h, int s, int d, int o, const char n[12])
 	{
 		power = p;
 		health = h;
@@ -51,7 +51,7 @@ public:
 
 };
 
-char a[12][12] = { "찌리리공","피카츄","고라파덕","거북왕","나인테일","리자몽",
+const char* a[12] = { "찌리리공","피카츄","고라파덕","거북왕","나인테일","리자몽",
 	"버터플","깨비참","후딘 ","마임맨","딱구리","투구푸스" };
 
 POK Voltorb(100, 60, 50, 40, 30, a[0]), Pikachu(100, 80, 60, 50, 80, a[1]);
